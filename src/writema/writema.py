@@ -118,16 +118,15 @@ class Writema:
         """
         self.endianness = self.__endianness[endianness]
 
-    def bytes(self, buf: bytes):
+    def bytes(self, buf: bytes) -> None:
         """ Writema bytes
 
         :param buf: number of bytes to write
         :return: self
         """
         self.buffer.write(buf)
-        return self
 
-    def write(self, _type: sizeType, to_write):
+    def write(self, _type: sizeType, to_write) -> None:
         """ Writema something signed
 
         :param _type: size type to write (Signed)
@@ -137,9 +136,8 @@ class Writema:
         rStr, rSize = self.__make_fmt(_type, True)
         buf = struct.pack(rStr, to_write)
         self.buffer.write(buf)
-        return self
 
-    def uwrite(self, _type: sizeType, to_write):
+    def uwrite(self, _type: sizeType, to_write) -> None:
         """ Writema something unsigned
 
         :param _type: size type to write (Unsigned)
@@ -149,7 +147,6 @@ class Writema:
         rStr, rSize = self.__make_fmt(_type, False)
         buf = struct.pack(rStr, to_write)
         self.buffer.write(buf)
-        return self
 
     def get_buffer(self) -> bytesType:
         """ Writema underlying buffer to memory
