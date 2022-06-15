@@ -2,7 +2,7 @@ import io
 import struct
 import os
 from enum import Enum
-from typing import Any, Union, Literal, Tuple, Optional
+from typing import Union, Literal, Tuple
 
 bytesType = bytes
 floatType = float

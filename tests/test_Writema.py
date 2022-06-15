@@ -28,8 +28,8 @@ def test_Writema_buffer_fulltest():
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
-        assert data == w.get_buffer()
-        assert data == w.get_io().read()
+    assert data == w.get_buffer()
+    assert data == w.get_io().read()
 
 
 def test_Writema_buffer_fulltest_names():
@@ -45,8 +45,8 @@ def test_Writema_buffer_fulltest_names():
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
-        assert data == w.get_buffer()
-        assert data == w.get_io().read()
+    assert data == w.get_buffer()
+    assert data == w.get_io().read()
 
 
 def test_Writema_buffer_fulltest_alt():
@@ -62,8 +62,8 @@ def test_Writema_buffer_fulltest_alt():
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
-        assert data == w.get_buffer()
-        assert data == w.get_io().read()
+    assert data == w.get_buffer()
+    assert data == w.get_io().read()
 
 
 def test_Writema_writing_fulltest():
@@ -80,9 +80,9 @@ def test_Writema_writing_fulltest():
     w.save()
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
-        with open("./tests/writetest.bin", "rb") as wp:
-            wdata = wp.read()
-        assert data == wdata
+    with open("./tests/writetest.bin", "rb") as wp:
+        wdata = wp.read()
+    assert data == wdata
 
 
 def test_Writema_endianness_check():
