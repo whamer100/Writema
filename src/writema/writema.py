@@ -2,7 +2,7 @@ import io
 import struct
 import os
 from enum import Enum
-from typing import Any, Union, Literal, Tuple
+from typing import Any, Union, Literal, Tuple, Optional
 
 bytesType = bytes
 floatType = float
@@ -23,7 +23,7 @@ class WritemaFloatTypes(Enum):
     double = "d"
 
 
-sizeLiteral = Literal["byte", "short", "int", "long", "float", "double"]
+sizeLiteral = Literal["byte", "short", "int", "long", "float", "f", "double", "d"]
 sizeType = Union[int, sizeLiteral, WritemaTypes, WritemaFloatTypes]
 
 
@@ -37,14 +37,18 @@ class Writema:
         1: "byte",
         2: "short",
         4: "int",
-        8: "long"
+        8: "long",
+        "f": "float",
+        "d": "double"
     }
 
     __ts_rev = {
         "byte": 1,
         "short": 2,
         "int": 4,
-        "long": 8
+        "long": 8,
+        "float": "f",
+        "double": "d"
     }
 
     __endianness = {
@@ -52,9 +56,11 @@ class Writema:
         "big": True
     }
 
-    def __init__(self, bytesio_or_path: Union[io.BytesIO, str]):
+    def __init__(self, bytesio_or_path: Union[io.BytesIO, str, Optional] = io.BytesIO()):
         self.writepath = ""
-        if type(bytesio_or_path) == io.BytesIO:
+        if bytesio_or_path is None:
+            self.buffer = io.BytesIO()
+        elif type(bytesio_or_path) == io.BytesIO:
             self.buffer = bytesio_or_path
         else:
             if os.path.isfile(bytesio_or_path):
