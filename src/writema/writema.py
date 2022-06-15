@@ -28,6 +28,8 @@ sizeType = Union[int, sizeLiteral, WritemaTypes, WritemaFloatTypes]
 
 
 def get_type(size: str) -> str:
+    if size in WritemaFloatTypes:
+        return WritemaFloatTypes[size].value
     return WritemaTypes[size].value  # python enums kinda suck
 
 
@@ -79,18 +81,18 @@ class Writema:
                 _str += get_type(self.__type_shorthand[size])
             else:
                 raise TypeError
-        elif type(size) == str:
-            if size in WritemaTypes.__members__:
-                _size = self.__ts_rev[size]
-                _str += get_type(size)
-            else:
-                raise TypeError
         elif type(size) == WritemaTypes:
             _size = self.__ts_rev[size.name]
             _str += size.value
         elif type(size) == WritemaFloatTypes:
             _size = 4 if size == WritemaFloatTypes.float else 8
             _str += "f" if size == WritemaFloatTypes.float else "d"
+        elif type(size) == str:
+            if size in WritemaTypes.__members__:
+                _size = self.__ts_rev[size]
+                _str += get_type(size)
+            else:
+                raise TypeError
         else:
             raise TypeError
         if not signed and type(size) != WritemaFloatTypes:
