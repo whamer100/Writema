@@ -56,7 +56,7 @@ class Writema:
         "big": True
     }
 
-    def __init__(self, bytesio_or_path: Union[io.BytesIO, str, Optional] = io.BytesIO()):
+    def __init__(self, bytesio_or_path: Union[io.BytesIO, str] = io.BytesIO()):
         self.writepath = ""
         if bytesio_or_path is None:
             self.buffer = io.BytesIO()
