@@ -166,7 +166,7 @@ class Writema:
         """
         pos = self.buffer.tell()
         self.buffer.seek(0)
-        buf = self.buffer
+        buf = io.BytesIO(self.buffer.read())
         self.buffer.seek(pos)
         return buf
 
