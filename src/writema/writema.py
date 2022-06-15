@@ -102,7 +102,7 @@ class Writema:
                 _str += get_type(size)
             elif size in self.__float_shorthand:
                 _size = size  # already correct size type
-                _str += get_type(size)
+                _str += _size
             else:
                 raise TypeError
         else:
