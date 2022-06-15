@@ -157,19 +157,31 @@ class Writema:
 
         :return: underlying buffer
         """
-        return self.buffer.read()
+        pos = self.buffer.tell()
+        self.buffer.seek(0)
+        buf = self.buffer.read()
+        self.buffer.seek(pos)
+        return buf
 
     def get_io(self) -> io.BytesIO:
         """ Writema underlying BytesIO to memory
 
         :return: underlying BytesIO object
         """
-        return self.buffer
+        pos = self.buffer.tell()
+        self.buffer.seek(0)
+        buf = self.buffer
+        self.buffer.seek(pos)
+        return buf
 
     def save(self) -> None:
         """ Writema file to disk
 
         :return: None
         """
+        pos = self.buffer.tell()
+        self.buffer.seek(0)
+        buf = self.buffer.read()
+        self.buffer.seek(pos)
         with open(self.writepath, "wb") as fp:
-            fp.write(self.buffer.read())
+            fp.write(buf)
