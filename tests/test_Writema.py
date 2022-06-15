@@ -23,8 +23,8 @@ def test_Writema_buffer_fulltest():
     w.write(8, 2396795999211369490)
     e_f64 = 2.718281828459045
     e_f32 = unpack(">f", pack(">f", e_f64))[0]  # convert to float32
-    w.write("f", e_f32)
     w.write("d", e_f64)
+    w.write("f", e_f32)
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
@@ -40,13 +40,13 @@ def test_Writema_buffer_fulltest_names():
     w.write("long",  2396795999211369490)
     e_f64 = 2.718281828459045
     e_f32 = unpack(">f", pack(">f", e_f64))[0]  # convert to float32
-    w.write("float", e_f32)
     w.write("double", e_f64)
+    w.write("float", e_f32)
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
         assert data == w.get_buffer()
-        assert data == w.get_io().getbuffer()
+        assert data == w.get_io().read()
 
 
 def test_Writema_buffer_fulltest_alt():
@@ -57,8 +57,8 @@ def test_Writema_buffer_fulltest_alt():
     w.write(WritemaTypes.long,  2396795999211369490)
     e_f64 = 2.718281828459045
     e_f32 = unpack(">f", pack(">f", e_f64))[0]  # convert to float32
-    w.write(WritemaFloatTypes.float, e_f32)
     w.write(WritemaFloatTypes.double, e_f64)
+    w.write(WritemaFloatTypes.float, e_f32)
     w.bytes(b"Hello, World!")
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
@@ -74,8 +74,8 @@ def test_Writema_writing_fulltest():
     w.write(8, 2396795999211369490)
     e_f64 = 2.718281828459045
     e_f32 = unpack(">f", pack(">f", e_f64))[0]  # convert to float32
-    w.write("f", e_f32)
     w.write("d", e_f64)
+    w.write("f", e_f32)
     w.bytes(b"Hello, World!")
     w.save()
     with open("./tests/test.bin", "rb") as fp:
