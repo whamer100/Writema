@@ -28,7 +28,7 @@ sizeType = Union[int, sizeLiteral, WritemaTypes, WritemaFloatTypes]
 
 
 def get_type(size: str) -> str:
-    if size in WritemaFloatTypes:
+    if size in WritemaFloatTypes.__members__:
         return WritemaFloatTypes[size].value
     return WritemaTypes[size].value  # python enums kinda suck
 
