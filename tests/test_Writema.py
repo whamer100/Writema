@@ -30,7 +30,7 @@ def test_Writema_buffer_fulltest():
         data = fp.read()
     assert data == w.get_buffer()
     assert data == w.get_io().read()
-    del w
+    print(0, id(w))
 
 
 def test_Writema_buffer_fulltest_names():
@@ -48,7 +48,7 @@ def test_Writema_buffer_fulltest_names():
         data = fp.read()
     assert data == w.get_buffer()
     assert data == w.get_io().read()
-    del w
+    print(1, id(w))
 
 
 def test_Writema_buffer_fulltest_alt():
@@ -66,7 +66,7 @@ def test_Writema_buffer_fulltest_alt():
         data = fp.read()
     assert data == w.get_buffer()
     assert data == w.get_io().read()
-    del w
+    print(2, id(w))
 
 
 def test_Writema_writing_fulltest():
@@ -86,7 +86,7 @@ def test_Writema_writing_fulltest():
     with open("./tests/writetest.bin", "rb") as wp:
         wdata = wp.read()
     assert data == wdata
-    del w
+    print(3, id(w))
 
 
 def test_Writema_endianness_check():
@@ -97,4 +97,4 @@ def test_Writema_endianness_check():
     w.set_endianness("little")
     w.write(4, 2018915346)
     assert w.get_buffer() == b"\x12\x34\x56\x78\x78\x56\x34\x12\x12\x34\x56\x78"
-    del w
+    print(4, id(w))
