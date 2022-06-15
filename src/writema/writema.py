@@ -67,7 +67,9 @@ class Writema:
     def __init__(self, bytesio_or_path: Optional[Union[io.BytesIO, str]] = None):
         self.writepath = ""
         self.buffer = io.BytesIO()
-        if type(bytesio_or_path) == io.BytesIO:
+        if bytesio_or_path is None:
+            pass  # I dont need to actually do anything
+        elif type(bytesio_or_path) == io.BytesIO:
             self.buffer = bytesio_or_path
         else:
             if os.path.isdir(bytesio_or_path):
