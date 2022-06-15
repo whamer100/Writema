@@ -1,5 +1,5 @@
 import pytest
-from src.writema.writema import Writema, WritemaTypes
+from writema import Writema, WritemaTypes
 import io
 from math import isclose
 from struct import pack, unpack
