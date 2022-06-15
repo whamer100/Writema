@@ -88,7 +88,7 @@ class Writema:
             _size = 4 if size == WritemaFloatTypes.float else 8
             _str += "f" if size == WritemaFloatTypes.float else "d"
         elif type(size) == str:
-            if size in WritemaTypes.__members__:
+            if size in WritemaTypes.__members__ or size in WritemaFloatTypes.__members__:
                 _size = self.__ts_rev[size]
                 _str += get_type(size)
             else:
