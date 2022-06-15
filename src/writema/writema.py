@@ -2,7 +2,7 @@ import io
 import struct
 import os
 from enum import Enum
-from typing import Union, Literal, Tuple
+from typing import Union, Literal, Tuple, Optional
 
 bytesType = bytes
 floatType = float
@@ -64,7 +64,7 @@ class Writema:
         "big": True
     }
 
-    def __init__(self, bytesio_or_path: Union[io.BytesIO, str] = io.BytesIO()):
+    def __init__(self, bytesio_or_path: Optional[Union[io.BytesIO, str]]):
         self.writepath = ""
         self.buffer = io.BytesIO()
         if type(bytesio_or_path) == io.BytesIO:
