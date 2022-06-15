@@ -69,7 +69,7 @@ class Writema:
         self.buffer = io.BytesIO()
         if bytesio_or_path is None:
             pass  # I dont need to actually do anything
-        elif type(bytesio_or_path) == io.BytesIO:
+        elif isinstance(bytesio_or_path, io.BytesIO):
             self.buffer = bytesio_or_path
         else:
             if os.path.isdir(bytesio_or_path):
@@ -98,11 +98,11 @@ class Writema:
                 _size = self.__ts_rev[size]
                 _str += get_type(size)
             elif size in WritemaFloatTypes.__members__:
-                _size = self.__fs_rev[size]
+                _size = 4 if self.__fs_rev[size] == "f" else 8
                 _str += get_type(size)
             elif size in self.__float_shorthand:
-                _size = size  # already correct size type
-                _str += _size
+                _size = 4 if size == "f" else 8
+                _str += size
             else:
                 raise TypeError
         else:
@@ -171,11 +171,22 @@ class Writema:
         self.buffer.seek(pos)
         return buf
 
-    def save(self) -> None:
+    def save(self, overwrite: bool = False, create_path: bool = False) -> None:
         """ Writema file to disk
 
+        :param overwrite: Overwrite file?
+        :param create_path: Create directory path to file if folders don't exist?
         :return: None
         """
+        if self.writepath == "":
+            raise ValueError("No valid path, or buffer is a BytesIO object.")
+        elif os.path.isfile(self.writepath) and not overwrite:
+            raise FileExistsError(f"File \"{self.writepath}\" exists, and overwrite flag is not set.")
+        elif os.path.isdir(self.writepath):
+            raise IsADirectoryError(f"Target path \"{self.writepath}\" is a directory.")
+        if create_path:
+            # create directories to path
+            os.makedirs(os.path.dirname(os.path.abspath(self.writepath)), exist_ok=True)
         pos = self.buffer.tell()
         self.buffer.seek(0)
         buf = self.buffer.read()
