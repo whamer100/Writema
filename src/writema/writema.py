@@ -97,8 +97,11 @@ class Writema:
             if size in WritemaTypes.__members__:
                 _size = self.__ts_rev[size]
                 _str += get_type(size)
-            elif size in WritemaFloatTypes.__members__ or size in self.__float_shorthand:
+            elif size in WritemaFloatTypes.__members__:
                 _size = self.__fs_rev[size]
+                _str += get_type(size)
+            elif size in self.__float_shorthand:
+                _size = size  # already correct size type
                 _str += get_type(size)
             else:
                 raise TypeError
