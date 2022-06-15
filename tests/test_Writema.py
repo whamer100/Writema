@@ -29,7 +29,7 @@ def test_Writema_buffer_fulltest():
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
         assert data == w.get_buffer()
-        assert data == w.get_io().getbuffer()
+        assert data == w.get_io().read()
 
 
 def test_Writema_buffer_fulltest_names():
@@ -63,7 +63,7 @@ def test_Writema_buffer_fulltest_alt():
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
         assert data == w.get_buffer()
-        assert data == w.get_io().getbuffer()
+        assert data == w.get_io().read()
 
 
 def test_Writema_writing_fulltest():
@@ -80,7 +80,7 @@ def test_Writema_writing_fulltest():
     w.save()
     with open("./tests/test.bin", "rb") as fp:
         data = fp.read()
-        with open("./tests/writetest.bin") as wp:
+        with open("./tests/writetest.bin", "rb") as wp:
             wdata = wp.read()
         assert data == wdata
 

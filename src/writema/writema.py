@@ -71,10 +71,9 @@ class Writema:
         elif type(bytesio_or_path) == io.BytesIO:
             self.buffer = bytesio_or_path
         else:
-            if os.path.isfile(bytesio_or_path):
-                self.writepath = os.path.normpath(bytesio_or_path)
-            else:
-                raise FileNotFoundError
+            if os.path.isdir(bytesio_or_path):
+                raise IsADirectoryError
+            self.writepath = os.path.normpath(bytesio_or_path)
 
         self.endianness = self.__endianness["little"]
 
